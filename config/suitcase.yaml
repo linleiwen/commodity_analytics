@@ -1,0 +1,31 @@
+# Suitcase / trip constraints for the luggage optimizer (spec section 10).
+trip_id: 2026-07-japan-trip
+
+# Expected date you clear US customs on the return leg. Used for shelf-life math.
+expected_us_return_date: 2026-08-05
+
+suitcases:
+  - name: checked_bag_1
+    usable_volume_liter: 75
+    max_weight_lb: 50
+    reserved_volume_liter: 20   # personal items / clothes
+    reserved_weight_lb: 15
+  - name: checked_bag_2_half
+    usable_volume_liter: 35
+    max_weight_lb: 25
+    reserved_volume_liter: 10
+    reserved_weight_lb: 5
+
+business_constraints:
+  max_skus: 40
+  max_units_per_sku_default: 6
+  max_units_per_yellow_risk_sku: 2
+  min_units_per_sku_default: 1
+  # Fraction of usable volume that any single category may occupy.
+  category_caps:
+    food: 0.55
+    cosmetic: 0.35
+    non_food_gifts: 0.40
+  diversity_bonus: true
+  # Small multiplicative nudge to spread picks across categories when diversity_bonus is on.
+  diversity_bonus_factor: 1.05

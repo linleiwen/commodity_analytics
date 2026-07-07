@@ -1,0 +1,145 @@
+# Category metadata. Maps each seed/product category to default flags used by the
+# normalizers, compliance engine, and luggage optimizer. See spec sections 2, 7, 13.
+#
+# Fields per category:
+#   group:            food | cosmetic | non_food_gifts  (used for luggage category caps)
+#   is_food:          bool
+#   is_cosmetic:      bool
+#   is_drug_or_otc_risk: bool  (default hint; keywords can still escalate)
+#   default_shelf_life_days: fallback when no expiration observed (null = require manual)
+#   default_melt_risk / crush_risk / leak_risk: LOW | MEDIUM | HIGH
+#   default_storage: ambient | cool | refrigerated | frozen
+
+categories:
+  food_souvenir_cookie:
+    group: food
+    is_food: true
+    is_cosmetic: false
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 150
+    default_melt_risk: MEDIUM
+    default_crush_risk: MEDIUM
+    default_leak_risk: LOW
+    default_storage: ambient
+
+  food_souvenir_cake:
+    group: food
+    is_food: true
+    is_cosmetic: false
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: null   # cakes are often short-dated -> require manual expiry
+    default_melt_risk: MEDIUM
+    default_crush_risk: HIGH
+    default_leak_risk: LOW
+    default_storage: ambient
+
+  food_souvenir_snack:
+    group: food
+    is_food: true
+    is_cosmetic: false
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 120
+    default_melt_risk: LOW
+    default_crush_risk: HIGH
+    default_leak_risk: LOW
+    default_storage: ambient
+
+  food_souvenir_chocolate:
+    group: food
+    is_food: true
+    is_cosmetic: false
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 180
+    default_melt_risk: HIGH
+    default_crush_risk: MEDIUM
+    default_leak_risk: LOW
+    default_storage: cool
+
+  food_souvenir_candy:
+    group: food
+    is_food: true
+    is_cosmetic: false
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 300
+    default_melt_risk: LOW
+    default_crush_risk: LOW
+    default_leak_risk: LOW
+    default_storage: ambient
+
+  cosmetic_mask:
+    group: cosmetic
+    is_food: false
+    is_cosmetic: true
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 730
+    default_melt_risk: LOW
+    default_crush_risk: LOW
+    default_leak_risk: MEDIUM
+    default_storage: ambient
+
+  cosmetics_makeup:
+    group: cosmetic
+    is_food: false
+    is_cosmetic: true
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 1095
+    default_melt_risk: LOW
+    default_crush_risk: LOW
+    default_leak_risk: LOW
+    default_storage: ambient
+
+  skincare:
+    group: cosmetic
+    is_food: false
+    is_cosmetic: true
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: 730
+    default_melt_risk: LOW
+    default_crush_risk: LOW
+    default_leak_risk: MEDIUM
+    default_storage: ambient
+
+  sunscreen:
+    group: cosmetic
+    is_food: false
+    is_cosmetic: true
+    is_drug_or_otc_risk: true    # SPF regulated as OTC drug in the US -> typically RED
+    default_shelf_life_days: 730
+    default_melt_risk: LOW
+    default_crush_risk: LOW
+    default_leak_risk: MEDIUM
+    default_storage: ambient
+
+  otc_drug:
+    group: cosmetic
+    is_food: false
+    is_cosmetic: false
+    is_drug_or_otc_risk: true    # eye drops, cold medicine, etc. -> RED
+    default_shelf_life_days: 730
+    default_melt_risk: LOW
+    default_crush_risk: LOW
+    default_leak_risk: MEDIUM
+    default_storage: ambient
+
+  non_food_gift:
+    group: non_food_gifts
+    is_food: false
+    is_cosmetic: false
+    is_drug_or_otc_risk: false
+    default_shelf_life_days: null   # no shelf life -> treated as non-perishable
+    default_melt_risk: LOW
+    default_crush_risk: MEDIUM
+    default_leak_risk: LOW
+    default_storage: ambient
+
+# Fallback used when a product's category is unknown.
+default_category:
+  group: non_food_gifts
+  is_food: false
+  is_cosmetic: false
+  is_drug_or_otc_risk: false
+  default_shelf_life_days: null
+  default_melt_risk: LOW
+  default_crush_risk: MEDIUM
+  default_leak_risk: LOW
+  default_storage: ambient

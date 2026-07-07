@@ -1,0 +1,131 @@
+# Compliance / platform-sellability rules. These drive the RED / YELLOW / GREEN gate.
+# RED never enters purchase recommendations; YELLOW is limited + must be human-verified.
+# See spec sections 3 and 17.2. This is heuristic tooling, NOT legal advice.
+
+# If any of these substrings appear in the product name / category / notes -> RED.
+red_keywords:
+  - sunscreen
+  - spf
+  - sunblock
+  - uv cut
+  - 日焼け止め
+  - 防晒
+  - eye drop
+  - 目薬
+  - 眼药
+  - pain relief
+  - painkiller
+  - cold medicine
+  - 風邪薬
+  - 感冒药
+  - acne treatment
+  - acne medicine
+  - antibiotic
+  - supplement
+  - サプリ
+  - 补剂
+  - cbd
+  - thc
+  - alcohol
+  - sake
+  - 酒精
+  - refrigerated
+  - 冷蔵
+  - 冷藏
+  - frozen
+  - 冷凍
+  - 冷冻
+  - fresh meat
+  - jerky
+  - raw egg
+  - 生卵
+  - prescription
+  - 処方
+  - medicated eye
+
+# If any of these appear (and no RED matched) -> YELLOW (needs human review, limited qty).
+yellow_keywords:
+  - whitening
+  - 美白
+  - brightening
+  - medicated
+  - 薬用
+  - quasi-drug
+  - 医薬部外品
+  - anti-aging
+  - retinol
+  - vitamin c serum
+  - serum
+  - 精华
+  - essence
+  - face mask
+  - 面膜
+  - dairy
+  - milk
+  - 牛乳
+  - chocolate
+  - チョコ
+  - 巧克力
+  - cream filling
+  - 生クリーム
+  - aerosol
+  - spray
+  - perfume
+  - 香水
+  - nail polish
+  - マニキュア
+
+# Categories that are inherently low-risk (default GREEN unless a keyword escalates).
+green_categories:
+  - stationery
+  - keychain
+  - plush
+  - sealed_cookie
+  - hard_candy
+  - makeup_tool
+  - non_spf_makeup
+  - cosmetics_makeup
+  - non_food_gift
+
+# Food sub-classification used by the compliance engine (spec 3.2).
+food_classes:
+  low_risk_shelf_stable:
+    label: LOW_RISK_PACKAGED_SHELF_STABLE
+    compliance: GREEN
+  animal_derived_check:
+    label: ANIMAL_DERIVED_CHECK
+    compliance: YELLOW
+    triggers: [dairy, milk, cheese, egg, meat, gelatin, 牛乳, 卵, 肉]
+  perishable_refrigerated:
+    label: PERISHABLE_OR_REFRIGERATED_RED
+    compliance: RED
+    triggers: [refrigerated, frozen, fresh, raw, 冷蔵, 冷凍, 生]
+
+# Shipping hazmat triggers (USPS HAZMAT / aerosol / flammable). -> local pickup only or block.
+hazmat_keywords:
+  - aerosol
+  - spray
+  - perfume
+  - 香水
+  - nail polish
+  - マニキュア
+  - alcohol
+  - flammable
+  - lighter
+  - battery
+  - 電池
+
+# Per-platform default posture. Confidence is a 0-1 hint, never an assertion of legality.
+platform_posture:
+  ebay:
+    food_allowed: true
+    notes: "Food allowed but restricted: safe packaging + clear expiration date required."
+  facebook:
+    food_allowed: true
+    notes: "Local pickup friendly; policy + buyer trust must be managed manually."
+  nextdoor:
+    food_allowed: true
+    notes: "Must follow local law; no regulated / health-safety-risk / illegal goods."
+  xhs:
+    food_allowed: true
+    notes: "Community/gray-market sales != compliant; treat as low confidence."

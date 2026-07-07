@@ -1,0 +1,67 @@
+# Scoring model configuration. All weights, penalties, and hard filters live here so the
+# scoring logic stays data-driven and auditable. See spec sections 9 and 17.1.
+
+# Base-score weights. Should sum to ~1.0 (validated at load time with a small tolerance).
+weights:
+  profit_density: 0.24     # net profit per liter, percentile-ranked
+  absolute_profit: 0.16    # net profit per unit, percentile-ranked
+  demand_heat: 0.18        # social mentions / engagement / trend / buyer-intent
+  sell_through: 0.14       # eBay sold, Terapeak sell-through, competitor count
+  shelf_life: 0.10         # remaining sellable window
+  supply_reliability: 0.07 # restock feasibility next trip
+  operational_ease: 0.06   # light / small / durable / photogenic / no cold chain
+  strategic_fit: 0.05      # brand-building, bundling, repeat-purchase potential
+
+# Absolute-profit guardrail: below this per-unit profit, apply a soft penalty
+# unless the product can be bundled.
+low_profit_usd_threshold: 3.0
+low_profit_penalty: 6
+
+# Penalties are subtracted from the 0-100 base score.
+penalties:
+  compliance_yellow_min: 10
+  compliance_yellow_max: 25
+  melt_medium: 8
+  melt_high: 20
+  fragility_medium: 5
+  fragility_high: 15
+  leak_medium: 4
+  leak_high: 12
+  missing_volume: 8
+  missing_weight: 5
+  missing_us_sold_data: 8
+  missing_jp_real_price: 8
+  # matching-confidence penalties keyed by band
+  match_conf_090_plus: 0
+  match_conf_080_089: 3
+  match_conf_070_079: 8
+
+# Hard filters. A product must pass ALL of these to enter Ranked_Products (Buy tiers).
+hard_filters:
+  min_food_remaining_days: 60
+  min_match_confidence: 0.70
+  min_expected_net_profit_usd: 0.01
+
+# Priority-tier cut points applied to final_score (0-100) after all penalties.
+tiers:
+  A: 70    # final_score >= 70
+  B: 55    # 55 <= final_score < 70
+  C: 40    # 40 <= final_score < 55
+  # below C.min and passing hard filters -> Watchlist
+  # failing a hard filter -> Watchlist or Blocked (see score engine)
+
+# Winsorization percentiles for profit density / absolute profit percentile ranks,
+# so a single anomalous listing cannot dominate the ranking.
+winsorize:
+  lower_pct: 0.05
+  upper_pct: 0.95
+
+# Shelf-life score curve (days remaining at expected US return date). See spec 9.3.
+shelf_life_curve:
+  non_perishable_score: 1.0   # non-food & non-cosmetic
+  bands:                       # evaluated top-down; first match wins
+    - { min_days: 365, score: 1.00 }
+    - { min_days: 180, score: 0.85 }
+    - { min_days: 90,  score: 0.60 }
+    - { min_days: 60,  score: 0.35 }
+  # below 60 days for food -> hard filter (handled in score engine)

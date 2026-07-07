@@ -1,0 +1,130 @@
+# Data-source registry: which collectors exist, whether they are enabled, their env-var
+# credential names, rate limits, and endpoints. See spec sections 4 and 5.
+#
+# `mode` documents the intended collection posture:
+#   api                -> official API, credentials via env
+#   manual_csv         -> human-exported CSV imported via `manual-import`
+#   browser_capture    -> headed browser + manual operation, snapshot saved (never bypass)
+#
+# `data_confidence` is the confidence level stamped onto observations from this source.
+
+defaults:
+  min_interval_seconds: 2      # polite spacing between requests, overridable per source
+  cache_ttl_hours: 720         # ~30 days; this pipeline runs roughly monthly
+  timeout_seconds: 30
+
+sources:
+  rakuten_ichiba:
+    mode: api
+    country: JP
+    platform: Rakuten
+    enabled: true
+    credential_env: [RAKUTEN_APP_ID]
+    endpoint: https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601
+    data_confidence: api_verified
+    docs: https://webservice.rakuten.co.jp/documentation/ichiba-item-search
+
+  yahoo_jp_shopping:
+    mode: api
+    country: JP
+    platform: YahooJP
+    enabled: true
+    credential_env: [YAHOO_JP_APP_ID]
+    endpoint: https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch
+    data_confidence: api_verified
+    docs: https://developer.yahoo.co.jp/webapi/shopping/
+
+  ebay_browse:
+    mode: api
+    country: US
+    platform: eBay
+    enabled: true
+    credential_env: [EBAY_CLIENT_ID, EBAY_CLIENT_SECRET]
+    oauth_endpoint: https://api.ebay.com/identity/v1/oauth2/token
+    endpoint: https://api.ebay.com/buy/browse/v1/item_summary/search
+    marketplace_env: EBAY_MARKETPLACE_ID
+    data_confidence: api_verified
+    docs: https://developer.ebay.com/api-docs/buy/static/api-browse.html
+
+  amazon_paapi:
+    mode: api
+    country: US
+    platform: AmazonUS
+    enabled: false   # off by default; needs approved PA-API account
+    credential_env: [AMAZON_PAAPI_ACCESS_KEY, AMAZON_PAAPI_SECRET_KEY, AMAZON_PAAPI_PARTNER_TAG]
+    data_confidence: api_verified
+    docs: https://webservices.amazon.com/paapi5/documentation/
+
+  keepa:
+    mode: api
+    country: US
+    platform: Keepa
+    enabled: false   # off by default; paid API
+    credential_env: [KEEPA_API_KEY]
+    data_confidence: api_verified
+    docs: https://keepaapi.readthedocs.io/
+
+  reddit:
+    mode: api
+    country: US
+    platform: Reddit
+    enabled: true
+    credential_env: [REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET]
+    oauth_endpoint: https://www.reddit.com/api/v1/access_token
+    endpoint: https://oauth.reddit.com/search
+    subreddits: [JapanTravel, AsianBeauty, snackexchange, AskAnAmerican, japanlife, washingtondc]
+    data_confidence: api_verified
+    docs: https://support.reddithelp.com/hc/en-us/articles/14945211791892
+
+  youtube:
+    mode: api
+    country: US
+    platform: YouTube
+    enabled: true
+    credential_env: [YOUTUBE_API_KEY]
+    endpoint: https://www.googleapis.com/youtube/v3/search
+    data_confidence: api_verified
+    docs: https://developers.google.com/youtube/v3
+
+  # ---- manual / browser sources (no automated scraping) ----
+  ebay_terapeak_import:
+    mode: manual_csv
+    country: US
+    platform: eBayTerapeak
+    enabled: true
+    manual_type: terapeak
+    data_confidence: manual_verified
+    docs: https://www.ebay.com/help/selling/selling-tools/terapeak-research-and-SEO?id=4853
+
+  google_trends_import:
+    mode: manual_csv
+    country: US
+    platform: GoogleTrends
+    enabled: true
+    manual_type: google_trends
+    data_confidence: manual_verified
+    docs: https://developers.google.com/search/apis/trends
+
+  manual_field_prices:
+    mode: manual_csv
+    country: JP
+    platform: FieldSurvey
+    enabled: true
+    manual_type: field_prices
+    data_confidence: manual_verified
+
+  social_notes_import:
+    mode: manual_csv
+    country: US
+    platform: SocialManual
+    enabled: true
+    manual_type: social_notes
+    data_confidence: scraped_low_confidence
+
+  browser_capture:
+    mode: browser_capture
+    country: US
+    platform: BrowserCapture
+    enabled: false   # opt-in; requires `pip install .[browser]` + manual operation
+    data_confidence: scraped_low_confidence
+    notes: "Headed browser + manual login/CAPTCHA solving; saves HTML + screenshot only."

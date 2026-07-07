@@ -1,0 +1,1 @@
+# Raw API payloads are cached here (JSON), keyed by source + query hash.

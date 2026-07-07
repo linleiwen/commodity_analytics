@@ -1,0 +1,30 @@
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# Local analytics DB + generated artifacts (keep the folders, ignore contents)
+data/*.duckdb
+data/*.sqlite
+data/*.db
+data/raw/*
+data/snapshots/*
+data/processed/*
+data/exports/*
+!data/**/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

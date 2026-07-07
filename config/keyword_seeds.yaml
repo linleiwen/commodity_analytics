@@ -1,0 +1,179 @@
+# Candidate SKU seeds with multi-language aliases (spec sections 13 and 18).
+# These are SEEDS ONLY -- not purchase advice. Every product must pass system scoring
+# and human verification. Categories must exist in config/categories.yaml.
+
+products:
+  - canonical_name_en: Shiroi Koibito
+    canonical_name_jp: 白い恋人
+    canonical_name_cn: 白色恋人
+    brand: Ishiya
+    category: food_souvenir_cookie
+    aliases:
+      - shiroi koibito
+      - 白い恋人
+      - 白色恋人
+      - ishiya white lover
+      - white lover cookie
+    risk_notes: shelf-stable but dairy/chocolate/melt check; expiration required
+
+  - canonical_name_en: Tokyo Banana
+    canonical_name_jp: 東京ばな奈
+    canonical_name_cn: 东京香蕉
+    brand: Tokyo Banana
+    category: food_souvenir_cake
+    aliases:
+      - tokyo banana
+      - 東京ばな奈
+      - 东京香蕉
+      - tokyo banana sponge cake
+    risk_notes: shelf-life may be short; likely needs careful expiry check
+
+  - canonical_name_en: Jaga Pokkuru
+    canonical_name_jp: じゃがポックル
+    canonical_name_cn: 薯条三兄弟
+    brand: Calbee
+    category: food_souvenir_snack
+    aliases:
+      - jaga pokkuru
+      - じゃがポックル
+      - 薯条三兄弟
+      - calbee potato farm
+      - potato pokkuru
+    risk_notes: crush risk; good souvenir heat candidate
+
+  - canonical_name_en: Japanese Regional KitKat Assortment
+    canonical_name_jp: キットカット ご当地
+    canonical_name_cn: 日本限定 KitKat
+    brand: Nestle
+    category: food_souvenir_chocolate
+    aliases:
+      - kitkat japan
+      - regional kitkat
+      - キットカット ご当地
+      - 日本限定 kitkat
+      - matcha kitkat
+    risk_notes: melt risk in summer; check price and expiry
+
+  - canonical_name_en: Royce Nama Chocolate
+    canonical_name_jp: ロイズ 生チョコレート
+    canonical_name_cn: Royce 生巧克力
+    brand: Royce
+    category: food_souvenir_chocolate
+    aliases:
+      - royce nama chocolate
+      - ロイズ 生チョコ
+      - royce 生巧克力
+      - royce ganache
+    risk_notes: refrigerated nama chocolate is high melt risk in summer; likely YELLOW/RED
+
+  - canonical_name_en: Tokyo Milk Cheese Factory Cookies
+    canonical_name_jp: 東京ミルクチーズ工場
+    canonical_name_cn: 东京牛奶芝士工房饼干
+    brand: Tokyo Milk Cheese Factory
+    category: food_souvenir_cookie
+    aliases:
+      - tokyo milk cheese cookie
+      - 東京ミルクチーズ工場
+      - salt and camembert cookie
+    risk_notes: dairy/cheese -> animal-derived check; keep packaging + expiry
+
+  - canonical_name_en: LuLuLun Face Mask
+    canonical_name_jp: ルルルン フェイスマスク
+    canonical_name_cn: LuLuLun 面膜
+    brand: LuLuLun
+    category: cosmetic_mask
+    aliases:
+      - lululun face mask
+      - ルルルン
+      - lululun 面膜
+      - lululun sheet mask
+    risk_notes: cosmetic labeling/manual review; avoid drug claims
+
+  - canonical_name_en: Canmake Makeup
+    canonical_name_jp: キャンメイク
+    canonical_name_cn: Canmake 彩妆
+    brand: Canmake
+    category: cosmetics_makeup
+    aliases:
+      - canmake
+      - キャンメイク
+      - canmake 彩妆
+      - canmake cream cheek
+    risk_notes: generally easier than skincare; check shade demand
+
+  - canonical_name_en: Hada Labo Gokujyun Lotion
+    canonical_name_jp: 肌ラボ 極潤
+    canonical_name_cn: 肌研 极润化妆水
+    brand: Hada Labo
+    category: skincare
+    aliases:
+      - hada labo
+      - 肌ラボ 極潤
+      - 肌研 极润
+      - gokujyun hyaluronic lotion
+    risk_notes: skincare -> YELLOW; check labeling and any medicated/whitening claims
+
+  - canonical_name_en: Anessa Sunscreen
+    canonical_name_jp: アネッサ 日焼け止め
+    canonical_name_cn: 安耐晒防晒
+    brand: Shiseido
+    category: sunscreen
+    aliases:
+      - anessa
+      - アネッサ
+      - 安耐晒
+      - anessa perfect uv
+    risk_notes: RED / high-risk in US because sunscreen/SPF is regulated as a drug
+
+  - canonical_name_en: Japanese Eye Drops
+    canonical_name_jp: 目薬
+    canonical_name_cn: 日本眼药水
+    brand: Rohto / Sante
+    category: otc_drug
+    aliases:
+      - japanese eye drops
+      - 目薬
+      - 眼药水
+      - rohto eye drops
+      - sante eye drops
+    risk_notes: RED for resale market test (OTC drug)
+
+  - canonical_name_en: Sanrio / Pokemon / Ghibli Small Goods
+    canonical_name_jp: キャラクター雑貨
+    canonical_name_cn: IP 小物
+    brand: Sanrio / Pokemon / Ghibli
+    category: non_food_gift
+    aliases:
+      - sanrio goods
+      - pokemon center goods
+      - ghibli goods
+      - キャラクター雑貨
+      - ip 小物
+      - hello kitty keychain
+    risk_notes: no shelf life; watch IP/counterfeit and avoid "official authorized" wording
+
+  - canonical_name_en: Japanese Character Stationery
+    canonical_name_jp: キャラクター文房具
+    canonical_name_cn: 日本文具
+    brand: Various
+    category: non_food_gift
+    aliases:
+      - japanese stationery
+      - キャラクター文房具
+      - 日本文具
+      - sanrio stationery
+      - sticker set
+    risk_notes: low compliance risk; check IP wording and demand
+
+  - canonical_name_en: Meiji Kinoko no Yama / Takenoko no Sato
+    canonical_name_jp: きのこの山 たけのこの里
+    canonical_name_cn: 明治蘑菇山竹笋村
+    brand: Meiji
+    category: food_souvenir_chocolate
+    aliases:
+      - kinoko no yama
+      - takenoko no sato
+      - きのこの山
+      - たけのこの里
+      - meiji mushroom chocolate
+    risk_notes: chocolate melt risk in summer; long-ish shelf life; verify expiry
