@@ -1,0 +1,9 @@
+product_name,query,region,trend_value,trend_slope,window_days,manual_heat_label,notes
+Shiroi Koibito,shiroi koibito,US,62,0.8,90,medium,steady interest
+Jaga Pokkuru,jaga pokkuru,US,55,1.2,90,medium,rising after tiktok
+Japanese Regional KitKat Assortment,japan kitkat,US,88,1.5,90,high,strong US search interest
+LuLuLun Face Mask,lululun,US,48,0.6,90,medium,asian beauty niche
+Canmake Makeup,canmake,US,44,0.9,90,medium,makeup niche rising
+Sanrio / Pokemon / Ghibli Small Goods,sanrio pokemon,US,80,1.1,90,high,IP evergreen
+Tokyo Banana,tokyo banana,US,40,0.2,90,low,flat interest
+Anessa Sunscreen,anessa sunscreen,US,58,1.0,90,medium,interest high but not sellable

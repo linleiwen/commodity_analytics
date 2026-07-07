@@ -1,0 +1,14 @@
+product_name,search_term,median_sold_price,sold_count,sell_through_pct,avg_shipping,competitor_count,days_to_sell,period_days,same_pack_flag,notes
+Shiroi Koibito,shiroi koibito 18,32.00,45,78,9.50,12,8,90,true,strong steady demand
+Tokyo Banana,tokyo banana 8,27.00,30,65,9.00,9,12,90,true,short shelf life buyers cautious
+Jaga Pokkuru,jaga pokkuru calbee,24.00,60,82,8.50,8,6,90,true,high sell-through souvenir
+Japanese Regional KitKat Assortment,japan kitkat matcha,19.00,120,88,7.00,25,5,90,true,very high volume many sellers
+Royce Nama Chocolate,royce nama chocolate,22.00,20,55,12.00,6,15,90,false,melts in transit refund risk
+Tokyo Milk Cheese Factory Cookies,tokyo milk cheese cookie,26.00,35,70,8.00,7,9,90,true,dairy cookie
+LuLuLun Face Mask,lululun mask 7,18.00,90,85,5.00,20,6,90,true,repeat purchase mask
+Canmake Makeup,canmake cream cheek,15.00,150,90,4.50,30,4,90,true,fast mover low ship
+Anessa Sunscreen,anessa spf50,39.00,40,60,8.00,10,10,90,true,high price but SPF drug risk
+Japanese Eye Drops,rohto eye drops,14.00,80,75,5.00,15,7,90,true,OTC drug risk
+Sanrio / Pokemon / Ghibli Small Goods,sanrio pokemon goods,22.00,110,80,6.00,40,6,90,false,IP goods strong demand
+Japanese Character Stationery,japanese stationery set,12.00,70,72,5.00,35,8,90,false,low price
+Meiji Kinoko no Yama / Takenoko no Sato,kinoko takenoko meiji,13.00,55,78,6.00,18,7,90,true,nostalgic chocolate snack

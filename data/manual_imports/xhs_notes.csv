@@ -1,0 +1,17 @@
+product_name,platform,query,post_title,post_url,post_date,like_count,save_count,comment_count,view_count,buyer_intent_comment_count,mention_count,post_count,manual_heat_label,window_days,notes
+Shiroi Koibito,Xiaohongshu,白色恋人,北海道必买白色恋人,https://example.com/xhs1,2026-06-15,3200,1800,240,50000,35,120,120,high,30,DMV asks where to buy
+Shiroi Koibito,TikTok,shiroi koibito haul,Japan snack haul,https://example.com/tt1,2026-06-20,15000,0,600,220000,50,80,80,viral,30,foreign tourist interest
+Jaga Pokkuru,Xiaohongshu,薯条三兄弟,薯条三兄弟机场限定,https://example.com/xhs2,2026-06-10,2600,1500,190,42000,28,95,95,high,30,scarcity in US
+Jaga Pokkuru,TikTok,jaga pokkuru,Calbee potato haul,https://example.com/tt2,2026-06-18,9000,0,300,120000,20,60,60,high,30,
+Japanese Regional KitKat Assortment,TikTok,japan kitkat,Japan KitKat flavors,https://example.com/tt3,2026-06-22,42000,0,1500,900000,120,300,300,viral,30,huge foreigner interest
+Japanese Regional KitKat Assortment,Xiaohongshu,日本限定kitkat,日本限定口味kitkat,https://example.com/xhs3,2026-06-05,5400,3200,410,88000,60,150,150,high,30,
+Tokyo Banana,Xiaohongshu,东京香蕉,东京香蕉伴手礼,https://example.com/xhs4,2026-06-12,1900,1100,120,30000,15,70,70,medium,30,short shelf life concern
+LuLuLun Face Mask,Xiaohongshu,lululun面膜,LuLuLun面膜测评,https://example.com/xhs5,2026-06-08,6800,4200,520,110000,70,180,180,high,30,repeat buyers
+LuLuLun Face Mask,TikTok,lululun mask,Japanese sheet mask haul,https://example.com/tt4,2026-06-19,12000,0,450,180000,40,90,90,high,30,
+Canmake Makeup,Xiaohongshu,canmake腮红,Canmake腮红平价,https://example.com/xhs6,2026-06-14,4300,2600,300,72000,45,130,130,high,30,affordable makeup
+Tokyo Milk Cheese Factory Cookies,Xiaohongshu,东京牛奶芝士,东京牛奶芝士饼干,https://example.com/xhs7,2026-06-11,2100,1250,140,34000,18,65,65,medium,30,
+Sanrio / Pokemon / Ghibli Small Goods,TikTok,sanrio haul,Sanrio Pokemon haul,https://example.com/tt5,2026-06-21,20000,0,800,300000,60,140,140,viral,30,IP goods hot
+Sanrio / Pokemon / Ghibli Small Goods,Xiaohongshu,三丽鸥周边,三丽鸥宝可梦周边,https://example.com/xhs8,2026-06-09,7600,4800,560,130000,80,170,170,high,30,gift potential
+Meiji Kinoko no Yama / Takenoko no Sato,Xiaohongshu,蘑菇山竹笋村,明治蘑菇山竹笋村,https://example.com/xhs9,2026-06-13,1500,900,95,22000,10,50,50,medium,30,nostalgic
+Hada Labo Gokujyun Lotion,Xiaohongshu,肌研极润,肌研极润化妆水,https://example.com/xhs10,2026-06-16,3000,1900,210,48000,25,85,85,medium,30,skincare interest
+Anessa Sunscreen,Xiaohongshu,安耐晒,安耐晒防晒测评,https://example.com/xhs11,2026-06-17,9000,6000,700,160000,90,200,200,viral,30,huge demand but SPF drug risk in US

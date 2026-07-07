@@ -96,9 +96,7 @@ class Product(BaseModel):
             "limited_edition_flag",
         ):
             row[flag] = int(bool(row.get(flag)))
-        row["created_at"] = row["updated_at"] = util.new_id  # placeholder; set by caller
-        row.pop("created_at", None)
-        row.pop("updated_at", None)
+        # created_at / updated_at timestamps are set by the caller (seed importer).
         return row
 
     def search_terms(self) -> list[str]:

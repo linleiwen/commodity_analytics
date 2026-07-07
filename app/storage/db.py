@@ -122,3 +122,15 @@ def read_products(db_path: Path | None = None) -> pd.DataFrame:
 def clear_run(conn: sqlite3.Connection, table: str, run_id: str) -> None:
     """Delete rows for a given run so a step can be re-run cleanly."""
     conn.execute(f"DELETE FROM {table} WHERE run_id = ?", (run_id,))
+
+
+def update_product_fields(conn: sqlite3.Connection, product_id: str, fields: dict[str, Any]) -> None:
+    """Merge-update Product Master: only overwrite columns whose new value is not None."""
+    cols = _table_columns(conn, "product_master")
+    updates = {k: v for k, v in fields.items() if k in cols and v is not None}
+    if not updates or not product_id:
+        return
+    updates["updated_at"] = utcnow()
+    set_sql = ", ".join(f"{k} = ?" for k in updates)
+    params = tuple(updates.values()) + (product_id,)
+    conn.execute(f"UPDATE product_master SET {set_sql} WHERE product_id = ?", params)

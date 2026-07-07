@@ -1,0 +1,15 @@
+product_name,brand,store_name,store_location,purchase_date,price_jpy,tax_included_flag,tax_free_price_jpy,package_count,weight_or_size_text,length_cm,width_cm,height_cm,package_weight_g,expiry_text,storage_condition,notes
+Shiroi Koibito,Ishiya,Don Quijote,Sapporo,2026-07-28,1200,true,1091,18,18 pieces 300g,24,18,5,300,2027.02.28,ambient,white chocolate langue de chat
+Tokyo Banana,Tokyo Banana,Tokyo Station Gransta,Tokyo,2026-07-29,1150,true,1045,8,8 pieces,27,20,5,250,2026.08.20,ambient,short shelf life sponge cake
+Jaga Pokkuru,Calbee,Calbee Plus,New Chitose Airport,2026-07-28,900,true,820,10,10 bags,18,15,9,180,2026.12.15,ambient,potato sticks crush risk
+Japanese Regional KitKat Assortment,Nestle,Don Quijote,Tokyo,2026-07-29,1500,true,1364,12,12 pieces matcha,22,16,8,320,2027.01.31,cool,summer melt risk
+Royce Nama Chocolate,Royce,Royce Shop,Sapporo,2026-07-28,800,true,728,20,20 pieces,15,12,3,180,2026.09.30,refrigerated,refrigerated nama chocolate
+Tokyo Milk Cheese Factory Cookies,Tokyo Milk Cheese Factory,Isetan,Tokyo,2026-07-30,1080,true,982,10,10 pieces,23,17,5,240,2027.03.31,ambient,salt camembert dairy
+LuLuLun Face Mask,LuLuLun,Matsumoto Kiyoshi,Tokyo,2026-07-30,1500,true,1364,7,7 sheets,15,11,4,200,2028.06.30,ambient,daily sheet mask
+Canmake Makeup,Canmake,Matsumoto Kiyoshi,Tokyo,2026-07-30,700,true,636,1,cream cheek,8,6,2,40,2029.01.31,ambient,popular cream cheek
+Hada Labo Gokujyun Lotion,Hada Labo,Welcia,Osaka,2026-07-31,900,true,818,1,170ml lotion,6,6,17,200,2028.12.31,ambient,hyaluronic lotion
+Anessa Sunscreen,Shiseido,Matsumoto Kiyoshi,Tokyo,2026-07-30,2500,true,2273,1,60ml SPF50,5,5,14,90,2028.07.31,ambient,SPF sunscreen regulated as drug in US
+Japanese Eye Drops,Rohto,Welcia,Osaka,2026-07-31,500,true,455,1,eye drops 13ml,3,3,8,20,2028.05.31,ambient,OTC eye drops
+Sanrio / Pokemon / Ghibli Small Goods,Sanrio,Pokemon Center,Tokyo,2026-07-29,1200,true,1091,1,keychain plush,12,8,5,120,,ambient,character goods no shelf life
+Japanese Character Stationery,Various,Loft,Tokyo,2026-07-30,600,true,545,1,sticker memo set,21,15,2,90,,ambient,character stationery
+Meiji Kinoko no Yama / Takenoko no Sato,Meiji,Supermarket,Tokyo,2026-07-31,300,true,273,1,74g box,16,11,4,74,2027.02.28,cool,mushroom bamboo chocolate
