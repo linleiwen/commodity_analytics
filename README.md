@@ -52,7 +52,7 @@ On Windows PowerShell use `Copy-Item .env.example .env` instead of `cp`.
 ```mermaid
 flowchart LR
     seeds[keyword_seeds.yaml] --> master[(Product Master)]
-    api[API collectors\nRakuten / Yahoo JP / eBay / Reddit / YouTube] --> obs[(Price + Demand)]
+    api[API collectors\nRakuten / eBay / Reddit / YouTube / Google Trends] --> obs[(Price + Demand)]
     manual[Manual imports\nfield prices / Terapeak / social] --> obs
     master --> norm[normalize\nunits / fx / match / shelf-life / fees]
     obs --> norm
@@ -69,7 +69,7 @@ flowchart LR
 | --- | --- |
 | `init-db` | Create the SQLite analytics database from `app/storage/schema.sql`. |
 | `import-seeds` | Load candidate SKUs / aliases from a seeds YAML into Product Master. |
-| `collect` | Run API collectors (Rakuten, Yahoo JP, eBay Browse, Reddit, YouTube …). |
+| `collect` | Run API collectors (Rakuten, eBay Browse, Reddit, YouTube, Google Trends). |
 | `manual-import` | Import human-exported CSVs (`field_prices`, `terapeak`, `social_notes`, `google_trends`). |
 | `normalize` | Currency + unit conversion, pack-size parsing, product matching, shelf-life, fees. |
 | `score` | Compliance rules → weighted score → penalties → priority tier → luggage plan. |

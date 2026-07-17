@@ -16,13 +16,10 @@ import pandas as pd
 from app import settings, util
 from app.collectors.base import CollectResult
 from app.collectors.ebay_browse import EbayBrowseCollector
-from app.collectors.keepa import KeepaCollector
-from app.collectors.amazon_paapi import AmazonPaapiCollector
 from app.collectors.google_trends_live import GoogleTrendsLiveCollector
 from app.collectors.manual_price_import import ManualImporter
 from app.collectors.rakuten_ichiba import RakutenIchibaCollector
 from app.collectors.reddit import RedditCollector
-from app.collectors.yahoo_jp_shopping import YahooJpShoppingCollector
 from app.collectors.youtube import YouTubeCollector
 from app.models.product import Product
 from app.normalizers import price as price_norm
@@ -33,10 +30,7 @@ from app.storage import db
 
 COLLECTORS = {
     "rakuten": RakutenIchibaCollector,
-    "yahoo_jp": YahooJpShoppingCollector,
     "ebay_browse": EbayBrowseCollector,
-    "amazon_paapi": AmazonPaapiCollector,
-    "keepa": KeepaCollector,
     "reddit": RedditCollector,
     "youtube": YouTubeCollector,
     "google_trends": GoogleTrendsLiveCollector,

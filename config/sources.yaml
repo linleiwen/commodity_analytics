@@ -24,15 +24,8 @@ sources:
     data_confidence: api_verified
     docs: https://webservice.rakuten.co.jp/documentation/ichiba-item-search
 
-  yahoo_jp_shopping:
-    mode: api
-    country: JP
-    platform: YahooJP
-    enabled: true
-    credential_env: [YAHOO_JP_APP_ID]
-    endpoint: https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch
-    data_confidence: api_verified
-    docs: https://developer.yahoo.co.jp/webapi/shopping/
+  # Yahoo! Shopping Japan removed: signup requires a Japanese phone number. Rakuten
+  # already covers the JP online-price role; field-survey prices remain the source of truth.
 
   ebay_browse:
     mode: api
@@ -46,23 +39,9 @@ sources:
     data_confidence: api_verified
     docs: https://developer.ebay.com/api-docs/buy/static/api-browse.html
 
-  amazon_paapi:
-    mode: api
-    country: US
-    platform: AmazonUS
-    enabled: false   # off by default; needs approved PA-API account
-    credential_env: [AMAZON_PAAPI_ACCESS_KEY, AMAZON_PAAPI_SECRET_KEY, AMAZON_PAAPI_PARTNER_TAG]
-    data_confidence: api_verified
-    docs: https://webservices.amazon.com/paapi5/documentation/
-
-  keepa:
-    mode: api
-    country: US
-    platform: Keepa
-    enabled: false   # off by default; paid API
-    credential_env: [KEEPA_API_KEY]
-    data_confidence: api_verified
-    docs: https://keepaapi.readthedocs.io/
+  # Amazon PA-API (retired 2026-05-15, no new signups) and Keepa (paid, Amazon-only)
+  # were removed: Amazon is not a resale channel here and contributes nothing to demand
+  # discovery. US realizable price comes from eBay Terapeak instead.
 
   reddit:
     mode: api

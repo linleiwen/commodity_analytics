@@ -75,7 +75,7 @@ $$
 
 | 类型 | 代表文件 | 做什么 | 没有 API key 会怎样？ |
 | --- | --- | --- | --- |
-| **API 采集器** | [ebay_browse.py](../app/collectors/ebay_browse.py)、[rakuten_ichiba.py](../app/collectors/rakuten_ichiba.py)、[yahoo_jp_shopping.py](../app/collectors/yahoo_jp_shopping.py)、[reddit.py](../app/collectors/reddit.py)、[youtube.py](../app/collectors/youtube.py) | 调官方 API，限速+缓存 | **优雅跳过**并记日志，不报错 |
+| **API 采集器** | [ebay_browse.py](../app/collectors/ebay_browse.py)、[rakuten_ichiba.py](../app/collectors/rakuten_ichiba.py)、[reddit.py](../app/collectors/reddit.py)、[youtube.py](../app/collectors/youtube.py)、[google_trends_live.py](../app/collectors/google_trends_live.py) | 调官方 API，限速+缓存 | **优雅跳过**并记日志，不报错 |
 | **人工 CSV 导入** | [manual_price_import.py](../app/collectors/manual_price_import.py) | 把你手填的表格读进来 | —— 这是 MVP 主力 |
 | **浏览器手动快照** | [browser_capture.py](../app/collectors/browser_capture.py) | 打开可见浏览器让你自己操作，存 HTML/截图 | 需要额外安装 playwright |
 
