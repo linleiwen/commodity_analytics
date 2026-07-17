@@ -18,6 +18,7 @@ from app.collectors.base import CollectResult
 from app.collectors.ebay_browse import EbayBrowseCollector
 from app.collectors.keepa import KeepaCollector
 from app.collectors.amazon_paapi import AmazonPaapiCollector
+from app.collectors.google_trends_live import GoogleTrendsLiveCollector
 from app.collectors.manual_price_import import ManualImporter
 from app.collectors.rakuten_ichiba import RakutenIchibaCollector
 from app.collectors.reddit import RedditCollector
@@ -38,6 +39,7 @@ COLLECTORS = {
     "keepa": KeepaCollector,
     "reddit": RedditCollector,
     "youtube": YouTubeCollector,
+    "google_trends": GoogleTrendsLiveCollector,
 }
 
 

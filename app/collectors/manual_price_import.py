@@ -85,7 +85,8 @@ class ManualImporter(BaseCollector):
 
     def _resolve_product(self, row: dict[str, Any]) -> tuple[str | None, float]:
         pid = _get(row, "product_id")
-        name = _get(row, "product_name", "product", "name")
+        name = _get(row, "product_name", "product", "name",
+                    "商品", "产品", "商品名", "关键词", "品牌")
         jan = _get(row, "jan", "jan_gtin", "gtin", "upc")
         m = self.matcher.match(title=str(name) if name else None,
                                jan=str(jan) if jan else None,
@@ -176,25 +177,28 @@ class ManualImporter(BaseCollector):
         result.signals.append(sig)
 
     def _social_row(self, row: dict[str, Any], result: CollectResult, pid: str) -> None:
+        # Column aliases cover hand-sampled notes AND third-party social-listening tool
+        # exports (千瓜 / 新红 / 蝉妈妈 / 灰豚), which use Chinese headers.
         sig = DemandSignal(
             run_id=self.run_id,
             product_id=pid,
-            source_name=str(_get(row, "platform", "source") or "SocialManual"),
-            query=str(_get(row, "query", "post_title") or ""),
-            source_url=str(_get(row, "post_url", "url") or ""),
-            observed_at=str(_get(row, "post_date", "observed_at") or db.utcnow()),
-            window_days=util.as_int(_get(row, "window_days"), 30),
+            source_name=str(_get(row, "platform", "source", "平台", "渠道") or "SocialManual"),
+            query=str(_get(row, "query", "post_title", "关键词", "标题", "笔记标题") or ""),
+            source_url=str(_get(row, "post_url", "url", "链接", "笔记链接", "作品链接") or ""),
+            observed_at=str(_get(row, "post_date", "observed_at", "发布时间", "日期") or db.utcnow()),
+            window_days=util.as_int(_get(row, "window_days", "统计周期", "周期天数"), 30),
             signal_kind="social",
-            mention_count=util.as_int(_get(row, "mention_count")),
-            post_count=util.as_int(_get(row, "post_count"), 1),
-            view_count=util.as_int(_get(row, "view_count")),
-            like_count=util.as_int(_get(row, "like_count")),
-            save_count=util.as_int(_get(row, "save_count")),
-            comment_count=util.as_int(_get(row, "comment_count")),
-            share_count=util.as_int(_get(row, "share_count")),
-            buyer_intent_count=util.as_int(_get(row, "buyer_intent_comment_count", "buyer_intent_count")),
-            manual_heat_label=str(_get(row, "manual_heat_label", "heat_label") or "").lower(),
-            notes=str(_get(row, "notes") or ""),
+            mention_count=util.as_int(_get(row, "mention_count", "提及数")),
+            post_count=util.as_int(_get(row, "post_count", "笔记数", "作品数", "视频数", "帖子数"), 1),
+            view_count=util.as_int(_get(row, "view_count", "播放量", "观看数", "曝光量", "阅读量")),
+            like_count=util.as_int(_get(row, "like_count", "点赞数", "点赞", "赞")),
+            save_count=util.as_int(_get(row, "save_count", "收藏数", "收藏")),
+            comment_count=util.as_int(_get(row, "comment_count", "评论数", "评论")),
+            share_count=util.as_int(_get(row, "share_count", "分享数", "转发数", "转发")),
+            buyer_intent_count=util.as_int(
+                _get(row, "buyer_intent_comment_count", "buyer_intent_count", "购买意向数", "求购数")),
+            manual_heat_label=str(_get(row, "manual_heat_label", "heat_label", "热度", "热度标签") or "").lower(),
+            notes=str(_get(row, "notes", "备注") or ""),
             confidence_level=ConfidenceLevel.SCRAPED_LOW.value,
         )
         result.signals.append(sig)

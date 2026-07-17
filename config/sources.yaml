@@ -86,6 +86,24 @@ sources:
     data_confidence: api_verified
     docs: https://developers.google.com/youtube/v3
 
+  google_trends:
+    mode: api                 # unofficial pytrends client; no API key required
+    country: US
+    platform: GoogleTrends
+    enabled: true
+    credential_env: []        # none needed; requires `pip install .[trends]`
+    # National US by default. Add "US-DC", "US-MD", "US-VA" for DMV-local heat, but
+    # more geos = more requests = higher chance of being temporarily rate-limited.
+    geos: [US]
+    timeframe: "today 3-m"
+    window_days: 90
+    hl: en-US
+    tz: 360
+    min_interval_seconds: 8   # pytrends throttles aggressively; keep spacing generous
+    geo_pause_seconds: 1.0
+    data_confidence: manual_verified
+    docs: https://developers.google.com/search/apis/trends
+
   # ---- manual / browser sources (no automated scraping) ----
   ebay_terapeak_import:
     mode: manual_csv

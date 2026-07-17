@@ -20,6 +20,16 @@ from app.models.social import DemandSignal
 _BUYER_INTENT_TERMS = ["where to buy", "can't find", "cant find", "how to get", "shipping",
                        "ship to", "dmv", "for sale", "looking for", "restock"]
 
+# Total upvotes + comments across matched posts -> qualitative heat label.
+_HEAT_BANDS = [(5000.0, "viral"), (1000.0, "high"), (150.0, "medium"), (0.0, "low")]
+
+
+def _heat_label(engagement: float) -> str:
+    for threshold, label in _HEAT_BANDS:
+        if engagement >= threshold:
+            return label
+    return "low"
+
 
 class RedditCollector(BaseCollector):
     key = "reddit"
@@ -86,6 +96,7 @@ class RedditCollector(BaseCollector):
                             text = f"{d.get('title', '')} {d.get('selftext', '')}".lower()
                             if any(term in text for term in _BUYER_INTENT_TERMS):
                                 intent += 1
+                    engagement = float(ups + comments)
                     result.signals.append(
                         DemandSignal(
                             run_id=self.run_id,
@@ -97,7 +108,9 @@ class RedditCollector(BaseCollector):
                             mention_count=posts,
                             like_count=ups,
                             comment_count=comments,
+                            engagement_score=engagement,
                             buyer_intent_count=intent,
+                            manual_heat_label=_heat_label(engagement),
                             confidence_level=ConfidenceLevel.API_VERIFIED.value,
                         )
                     )

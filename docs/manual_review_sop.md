@@ -28,9 +28,26 @@ Sample the top 20-50 public results per query (Xiaohongshu / TikTok / etc.). Rec
 public counts (likes, saves, comments, views) plus an estimate of buyer-intent comments
 ("where to buy", "ship to DMV", "restock?"). Do not collect personal info.
 
-## 4. Google Trends (`google_trends`)
-Export relative interest for US / DC / MD / VA per keyword. Record `trend_value` (0-100)
-and an approximate `trend_slope`.
+**Xiaohongshu / TikTok are deliberately NOT auto-scraped** (strong anti-bot, login walls,
+ToS/privacy risk — spec 4.4 / 5.1). Two compliant ways to get their heat:
+
+- **Third-party social-listening tools (recommended).** Export keyword/heat data from a
+  licensed aggregator (千瓜 / 新红 / 蝉妈妈 / 灰豚), then import the CSV. The importer
+  understands their Chinese headers directly (点赞数, 收藏数, 评论数, 播放量, 笔记数, 平台,
+  链接, 发布时间 …). See the template `data/manual_imports/xhs_thirdparty_template.csv`, then:
+  `python -m app.cli manual-import --type social_notes --file <csv> --run-id <run>`.
+- **Assisted manual sampling.** Use `capture` (visible browser you log into yourself) to
+  save snapshots, then hand-enter the visible public counts. Never bypass a challenge.
+
+## 4. Google Trends
+Two options, same `demand_signals` table:
+
+- **Live (recommended):** `pip install ".[trends]"` then
+  `python -m app.cli collect --sources google_trends --run-id <run>`. Uses the unofficial
+  `pytrends` client (no API key); tune geos/timeframe under `google_trends` in
+  `config/sources.yaml`. It is rate-limited, so it throttles + caches and skips on error.
+- **Manual CSV (`google_trends`):** export relative interest for US / DC / MD / VA per
+  keyword; record `trend_value` (0-100) and an approximate `trend_slope`.
 
 ## 5. Acting on the workbook
 Open `Manual_Review` in the exported workbook. Each row tells you the missing field, why
