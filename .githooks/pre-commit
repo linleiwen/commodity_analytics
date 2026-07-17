@@ -1,0 +1,54 @@
+#!/bin/sh
+# Secret-scanning pre-commit hook (zero dependencies; POSIX sh / Git Bash).
+#
+# Blocks a commit when the staged changes contain:
+#   1. an environment file that should stay local (.env / .env.local / .env.*),
+#      with the sole exception of .env.example (the tracked template);
+#   2. a known secret fingerprint (AWS / OpenAI / GitHub / Google / Slack / private key);
+#   3. one of this project's credential env vars assigned a non-empty, non-placeholder value.
+#
+# Install once:  make install-hooks   (or: git config core.hooksPath .githooks)
+# Bypass (use sparingly, only when you are certain):  git commit --no-verify
+
+fail=0
+
+note() {
+    if [ "$fail" -eq 0 ]; then
+        printf '\n\033[31m✖ pre-commit: possible secret in staged changes\033[0m\n\n' >&2
+    fi
+    fail=1
+    printf '  %s\n' "$1" >&2
+}
+
+# --- 1) staged env files (allow only .env.example) -------------------------
+for f in $(git diff --cached --name-only --diff-filter=ACM); do
+    case "$f" in
+        .env.example) : ;;                              # tracked template -> allowed
+        .env|.env.*|*/.env|*/.env.*)
+            note "staged env file: $f  (should be gitignored, not committed)" ;;
+    esac
+done
+
+# --- 2/3) scan ADDED lines of the staged diff ------------------------------
+# Only inspect added lines (leading '+'), and skip the diff's own '+++' headers.
+added="$(git diff --cached -U0 --no-color | grep -E '^\+' | grep -Ev '^\+\+\+')"
+
+CREDS='RAKUTEN_APP_ID|YAHOO_JP_APP_ID|EBAY_CLIENT_ID|EBAY_CLIENT_SECRET|AMAZON_PAAPI_ACCESS_KEY|AMAZON_PAAPI_SECRET_KEY|AMAZON_PAAPI_PARTNER_TAG|KEEPA_API_KEY|REDDIT_CLIENT_ID|REDDIT_CLIENT_SECRET|YOUTUBE_API_KEY'
+
+# Known high-precision secret fingerprints.
+fp="$(printf '%s\n' "$added" | grep -nE \
+    'AKIA[0-9A-Z]{16}|sk-[A-Za-z0-9]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{35}|xox[baprs]-[0-9A-Za-z-]{10,}|-----BEGIN [A-Z ]*PRIVATE KEY-----')"
+[ -n "$fp" ] && note "secret fingerprint detected:" && printf '%s\n' "$fp" | sed 's/^/      /' >&2
+
+# Project credential vars set to a real value (ignore empty + obvious placeholders).
+cred="$(printf '%s\n' "$added" \
+    | grep -En "($CREDS)[[:space:]]*=[[:space:]]*[^[:space:]\"']" \
+    | grep -Ev "=[[:space:]]*$|your_|xxxx|<[^>]+>|example|placeholder|EBAY_US|japan-dmv")"
+[ -n "$cred" ] && note "credential variable assigned a value:" && printf '%s\n' "$cred" | sed 's/^/      /' >&2
+
+if [ "$fail" -ne 0 ]; then
+    printf '\n  Remove the secret (keep real keys only in the gitignored .env).\n' >&2
+    printf '  If this is a false positive: git commit --no-verify\n\n' >&2
+    exit 1
+fi
+exit 0

@@ -3,10 +3,14 @@ PY ?= python
 OUT ?= data/exports/japan_dmv_product_rankings.xlsx
 QA  ?= data/exports/qa_report.md
 
-.PHONY: install install-dev test lint init-db seeds normalize score export qa run-all clean
+.PHONY: install install-dev install-hooks test lint init-db seeds normalize score export qa run-all clean
 
 install:
 	$(PY) -m pip install -e .
+
+install-hooks:
+	git config core.hooksPath .githooks
+	@echo "pre-commit secret scanner enabled (.githooks/pre-commit)"
 
 install-dev:
 	$(PY) -m pip install -e ".[dev]"
