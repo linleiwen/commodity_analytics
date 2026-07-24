@@ -24,7 +24,9 @@ class RakutenIchibaCollector(BaseCollector):
             return self.skip_result(skip)
 
         result = CollectResult()
-        app_id = self.creds().get("RAKUTEN_APP_ID", "")
+        creds = self.creds()
+        app_id = creds.get("RAKUTEN_APP_ID", "")
+        access_key = creds.get("RAKUTEN_ACCESS_KEY", "")  # pk_...; required since Feb-2026 API
         endpoint = self.config["endpoint"]
         timeout = self.defaults.get("timeout_seconds", 30)
         try:
@@ -40,8 +42,8 @@ class RakutenIchibaCollector(BaseCollector):
                     if payload is None:
                         resp = client.get(
                             endpoint,
-                            params={"applicationId": app_id, "keyword": keyword,
-                                    "hits": 20, "format": "json"},
+                            params={"applicationId": app_id, "accessKey": access_key,
+                                    "keyword": keyword, "hits": 20, "format": "json"},
                         )
                         if resp.status_code != 200:
                             result.logs.append(self.log("failure", message=resp.text[:200],

@@ -69,6 +69,16 @@ def _build_matcher() -> ProductMatcher:
 
 
 def _persist_result(conn, result: CollectResult) -> tuple[int, int]:
+    # Idempotency: re-running a collector/import for the same run replaces that
+    # source's rows instead of duplicating them (signals would otherwise double-count).
+    run_ids = {x.run_id for x in (*result.observations, *result.signals)}
+    for run_id in run_ids:
+        for src in {o.source_name for o in result.observations if o.run_id == run_id}:
+            conn.execute("DELETE FROM price_observations WHERE run_id = ? AND source_name = ?",
+                         (run_id, src))
+        for src in {s.source_name for s in result.signals if s.run_id == run_id}:
+            conn.execute("DELETE FROM demand_signals WHERE run_id = ? AND source_name = ?",
+                         (run_id, src))
     for obs in result.observations:
         obs.observed_at = obs.observed_at or db.utcnow()
         db.upsert(conn, "price_observations", obs.to_row())

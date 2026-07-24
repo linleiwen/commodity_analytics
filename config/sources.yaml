@@ -19,8 +19,10 @@ sources:
     country: JP
     platform: Rakuten
     enabled: true
-    credential_env: [RAKUTEN_APP_ID]
-    endpoint: https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601
+    # Feb-2026 API migration: new host/path + accessKey (pk_...) required alongside
+    # the (now UUID-format) applicationId. Old app.rakuten.co.jp endpoint died 2026-05-14.
+    credential_env: [RAKUTEN_APP_ID, RAKUTEN_ACCESS_KEY]
+    endpoint: https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20220601
     data_confidence: api_verified
     docs: https://webservice.rakuten.co.jp/documentation/ichiba-item-search
 
