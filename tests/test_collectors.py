@@ -64,6 +64,19 @@ def test_social_import_still_accepts_english_headers(tmp_path):
     assert result.signals[0].manual_heat_label == "high"
 
 
+def test_parse_total_units_pack_normalization():
+    from app.normalizers.units import parse_total_units
+
+    assert parse_total_units("ISHIYA 白い恋人 ホワイト 12枚入") == 12
+    assert parse_total_units("ISHIYA 白い恋人 ホワイト（9枚入）×6個セット 袋付き") == 54
+    assert parse_total_units("ISHIYA 白い恋人（18枚入） 6個セット") == 108
+    assert parse_total_units("石屋製菓 白い恋人（12枚入）×10個セット") == 120
+    assert parse_total_units("Shiroi Koibito White Chocolate 24 Pcs Japan") == 24
+    assert parse_total_units("Japanese KitKat 30 Count Assorted") == 30
+    assert parse_total_units("キャンメイク クリームチーク CL01") is None  # no count -> None
+    assert parse_total_units("御中元 2026 ギフト") is None  # year is not a pack size
+
+
 def test_trends_slope_and_heat_label():
     assert _slope([10, 20, 30, 40]) > 0        # rising interest
     assert _slope([40, 30, 20, 10]) < 0        # falling interest

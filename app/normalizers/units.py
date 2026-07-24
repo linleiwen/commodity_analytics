@@ -33,6 +33,54 @@ _DIM_PATTERN = re.compile(
 )
 
 
+# Per-listing total-unit parsing (pack-size normalization, spec 8.3): content count
+# (12枚入 / 24 pcs) times an optional set multiplier (×6個セット / 2 boxes).
+_CONTENT_PATTERNS = [
+    re.compile(r"(\d+)\s*(?:枚|個|本|袋|包|粒|食)\s*入?り?"),
+    re.compile(r"(\d+)\s*(?:pcs?|pieces?|count|ct|sheets?|masks?)\b", re.IGNORECASE),
+]
+_MULTIPLIER_PATTERNS = [
+    re.compile(r"[x×]\s*(\d+)\s*(?:個|箱|袋|缶)?\s*(?:セット)?(?!\s*[\d.]*\s*(?:cm|mm|g\b))", re.IGNORECASE),
+    re.compile(r"(\d+)\s*(?:個|箱)セット"),
+    re.compile(r"(?:set\s+of|)\s*(\d+)\s*(?:boxes|sets|bags)\b", re.IGNORECASE),
+]
+
+
+def parse_total_units(text: str | None) -> int | None:
+    """Total sellable units in a listing title: content count x set multiplier.
+
+    ``"白い恋人（9枚入）×6個セット"`` -> 54; ``"24 pcs"`` -> 24; unparseable -> None.
+    """
+    if not text:
+        return None
+    s = str(text)
+    content = None
+    for pat in _CONTENT_PATTERNS:
+        m = pat.search(s)
+        if m:
+            try:
+                v = int(m.group(1))
+                if v > 0:
+                    content = v
+                    break
+            except ValueError:
+                continue
+    multiplier = None
+    for pat in _MULTIPLIER_PATTERNS:
+        m = pat.search(s)
+        if m:
+            try:
+                v = int(m.group(1))
+                if 0 < v <= 100:  # sanity: ×2026 in a date is not a set size
+                    multiplier = v
+                    break
+            except ValueError:
+                continue
+    if content and multiplier:
+        return content * multiplier
+    return content or multiplier
+
+
 def parse_pack_count(text: str | None) -> int | None:
     if not text:
         return None

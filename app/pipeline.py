@@ -56,6 +56,7 @@ def _load_package_estimates() -> dict[str, dict[str, Any]]:
             "package_width_cm": dims[1] if len(dims) > 1 else None,
             "package_height_cm": dims[2] if len(dims) > 2 else None,
             "package_weight_g": est.get("weight_g"),
+            "package_count": est.get("package_count"),
         }
     return out
 

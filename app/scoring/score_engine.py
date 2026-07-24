@@ -72,6 +72,29 @@ def _aggregate_product(
     p_obs = obs[obs["product_id"] == pid] if not obs.empty else obs
     p_sig = signals[signals["product_id"] == pid] if not signals.empty else signals
 
+    # Canonical pack size: listing prices on both sides are normalized to per-unit and
+    # scaled back to this, so a 12-pc box never competes against a 54-pc gift set.
+    canonical_n = product.get("package_count")
+    canonical_n = int(canonical_n) if canonical_n and not pd.isna(canonical_n) else 1
+
+    def _canonical_price_median(df: pd.DataFrame) -> float | None:
+        """Median price normalized to one canonical package.
+
+        A parsed title count rescales price -> per-unit x canonical_n. A title with NO
+        parseable count is assumed to already sell one canonical package (titles that
+        omit the count overwhelmingly describe the standard single box), so its price
+        passes through unscaled -- never treated as a single-piece price.
+        """
+        prices = pd.to_numeric(df["price_usd"], errors="coerce")
+        titles = df["listing_title"] if "listing_title" in df.columns else pd.Series("", index=df.index)
+        normalized = []
+        for price, title in zip(prices, titles):
+            if pd.isna(price):
+                continue
+            n = units.parse_total_units(title)
+            normalized.append(price / n * canonical_n if n else float(price))
+        return float(pd.Series(normalized).median()) if normalized else None
+
     # ---- JP acquisition cost (USD): prefer manual field-survey prices ----
     jp = p_obs[(p_obs["country"] == "JP") & p_obs["price_usd"].notna()] if not p_obs.empty else p_obs
     if not jp.empty and "listing_title" in jp.columns:
@@ -81,13 +104,11 @@ def _aggregate_product(
     if not jp.empty:
         field = jp[jp["source_type"] == "manual"]
         if not field.empty:
+            # Field-survey rows record the real store price of the canonical package.
             jp_cost = _median(field["price_usd"])
         else:
-            # Online JP listings mix single boxes with multi-box gift sets, which drags
-            # the median far above what one unit costs in a store. The 25th percentile
-            # tracks the single-pack price band until real field prices arrive.
-            s = pd.to_numeric(jp["price_usd"], errors="coerce").dropna()
-            jp_cost = float(s.quantile(0.25)) if not s.empty else None
+            cp = _canonical_price_median(jp)
+            jp_cost = round(cp, 4) if cp is not None else None
 
     # ---- US expected sold price (USD): prefer sell-through medians, else haircut listings ----
     us_price = None
@@ -98,9 +119,9 @@ def _aggregate_product(
     if us_price is None and not p_obs.empty:
         us_obs = p_obs[(p_obs["country"] == "US") & p_obs["price_usd"].notna()]
         if not us_obs.empty:
-            us_price = _median(us_obs["price_usd"])
-            if us_price is not None:
-                us_price *= 0.90  # active-listing prices overstate realized sale price
+            cp = _canonical_price_median(us_obs)
+            if cp is not None:
+                us_price = cp * 0.90  # active-listing prices overstate realized sale price
 
     # ---- volume / weight ----
     vol, wt_g, vol_estimated, wt_missing = units.resolve_volume_weight(

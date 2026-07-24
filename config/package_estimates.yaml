@@ -11,30 +11,37 @@
 
 estimates:
   Shiroi Koibito:
+    package_count: 12
     assumed_version: 12-piece box
     dims_cm: [19, 14, 4]
     weight_g: 260
   Tokyo Banana:
+    package_count: 8
     assumed_version: 8-piece box
     dims_cm: [25, 11, 5]
     weight_g: 350
   Jaga Pokkuru:
+    package_count: 10
     assumed_version: 10-bag box
     dims_cm: [25, 13, 10]
     weight_g: 300
   Japanese Regional KitKat Assortment:
+    package_count: 12
     assumed_version: 12-mini bag
     dims_cm: [20, 15, 3]
     weight_g: 150
   Royce Nama Chocolate:
+    package_count: 20
     assumed_version: 20-piece box (blocked anyway)
     dims_cm: [15, 12, 3]
     weight_g: 300
   Tokyo Milk Cheese Factory Cookies:
+    package_count: 10
     assumed_version: 10-piece box
     dims_cm: [22, 12, 4]
     weight_g: 250
   LuLuLun Face Mask:
+    package_count: 7
     assumed_version: 7-day pack
     dims_cm: [13, 10, 5]
     weight_g: 250
@@ -75,14 +82,17 @@ estimates:
     dims_cm: [15, 10, 4]
     weight_g: 90
   Yoku Moku Cigare:
+    package_count: 14
     assumed_version: 14-piece tin
     dims_cm: [20, 14, 5]
     weight_g: 350
   Sugar Butter Sand no Ki:
+    package_count: 14
     assumed_version: 14-piece box
     dims_cm: [24, 12, 5]
     weight_g: 300
   Press Butter Sand:
+    package_count: 9
     assumed_version: 9-piece box
     dims_cm: [18, 12, 5]
     weight_g: 300
@@ -99,10 +109,12 @@ estimates:
     dims_cm: [12, 8, 2]
     weight_g: 50
   Hi-Chew Japan Limited Flavors:
+    package_count: 5
     assumed_version: 5-pack sleeve
     dims_cm: [15, 10, 4]
     weight_g: 250
   Kameda Kaki no Tane:
+    package_count: 6
     assumed_version: 6-pack bag
     dims_cm: [20, 15, 8]
     weight_g: 200
@@ -111,10 +123,12 @@ estimates:
     dims_cm: [15, 8, 3]
     weight_g: 70
   Country Ma'am Cookies:
+    package_count: 16
     assumed_version: 16-piece bag
     dims_cm: [22, 15, 6]
     weight_g: 200
   Tirol Choco Assortment:
+    package_count: 27
     assumed_version: 27-piece bag
     dims_cm: [20, 15, 5]
     weight_g: 250
@@ -163,6 +177,7 @@ estimates:
     dims_cm: [16, 12, 3]
     weight_g: 250
   mt Washi Tape Set:
+    package_count: 5
     assumed_version: 5-roll set
     dims_cm: [10, 10, 3]
     weight_g: 120
@@ -171,6 +186,7 @@ estimates:
     dims_cm: [18, 6, 2]
     weight_g: 30
   Zebra Mildliner Japan Set:
+    package_count: 5
     assumed_version: 5-pen set
     dims_cm: [15, 10, 2]
     weight_g: 60
@@ -179,6 +195,7 @@ estimates:
     dims_cm: [25, 18, 15]
     weight_g: 250
   Gachapon Capsule Toys Assortment:
+    package_count: 5
     assumed_version: 5-capsule set
     dims_cm: [15, 10, 6]
     weight_g: 150
