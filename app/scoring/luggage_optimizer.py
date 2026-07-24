@@ -85,13 +85,21 @@ def optimize(
     diversity_factor = bc.get("diversity_bonus_factor", 1.05)
     cat_cap_volume = {g: frac * avail_vol for g, frac in cat_fraction.items()}
 
+    exclude_limited = bool(bc.get("exclude_limited_edition_from_plan", True))
+
     candidates: list[Candidate] = []
+    opportunistic: list[Score] = []
     for s in scores:
         if s.priority_tier not in _BUY_TIERS:
             continue
         if not s.expected_net_profit_usd or s.expected_net_profit_usd <= 0:
             continue
         product = products.get(s.product_id, {})
+        if exclude_limited and product.get("limited_edition_flag"):
+            # Limited/exclusive stock cannot be counted on: keep the ranking, but do
+            # not reserve committed suitcase space -- buy opportunistically if found.
+            opportunistic.append(s)
+            continue
         comp = compliance.get(s.product_id, {})
         is_yellow = comp.get("compliance_status") == Compliance.YELLOW.value
         unit_vol = s.volume_used_liter or _MIN_UNIT_VOLUME
@@ -147,6 +155,14 @@ def optimize(
         available_weight_lb=round(avail_wt, 2),
         category_volume={g: round(v, 2) for g, v in cat_used.items()},
     )
+    for s in opportunistic:
+        s.recommended_qty = 0
+        s.estimated_total_profit = 0.0
+        s.volume_used_liter = 0.0
+        s.weight_used_lb = 0.0
+        s.packing_notes = ("limited edition: NOT in committed plan -- buy opportunistically "
+                           "if found in store; " + _packing_notes(products.get(s.product_id, {})))
+
     risk_units = {Compliance.GREEN.value: 0, Compliance.YELLOW.value: 0}
     for c in candidates:
         s = c.score

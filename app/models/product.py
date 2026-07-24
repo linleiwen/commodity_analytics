@@ -45,6 +45,7 @@ class Product(BaseModel):
     crush_risk_level: str = RiskLevel.LOW.value
     leak_risk_level: str = RiskLevel.LOW.value
     limited_edition_flag: bool = False
+    discovery_only_flag: bool = False  # brand/category seed: ranking context, never a buy row
 
     category_group: str = "non_food_gifts"
     default_shelf_life_days: int | None = None
@@ -81,6 +82,8 @@ class Product(BaseModel):
             leak_risk_level=defaults.get("default_leak_risk", RiskLevel.LOW.value),
             category_group=defaults.get("group", "non_food_gifts"),
             default_shelf_life_days=defaults.get("default_shelf_life_days"),
+            limited_edition_flag=bool(seed.get("limited_edition", False)),
+            discovery_only_flag=bool(seed.get("discovery_only", False)),
             risk_notes=seed.get("risk_notes", ""),
         )
 
@@ -94,6 +97,7 @@ class Product(BaseModel):
             "is_drug_or_otc_risk",
             "is_hazmat_shipping_risk",
             "limited_edition_flag",
+            "discovery_only_flag",
         ):
             row[flag] = int(bool(row.get(flag)))
         # created_at / updated_at timestamps are set by the caller (seed importer).

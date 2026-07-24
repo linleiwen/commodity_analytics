@@ -47,6 +47,13 @@ def init_db(db_path: Path | None = None) -> Path:
     schema_sql = settings.SCHEMA_PATH.read_text(encoding="utf-8")
     with connect(path) as conn:
         conn.executescript(schema_sql)
+        # Lightweight migration: columns added to schema.sql after a DB was created
+        # (CREATE TABLE IF NOT EXISTS won't alter existing tables).
+        for table, col, decl in [
+            ("product_master", "discovery_only_flag", "INTEGER DEFAULT 0"),
+        ]:
+            if col not in _table_columns(conn, table):
+                conn.execute(f"ALTER TABLE {table} ADD COLUMN {col} {decl}")
     return path
 
 

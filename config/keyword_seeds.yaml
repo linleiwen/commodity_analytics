@@ -46,6 +46,7 @@ products:
     canonical_name_cn: 日本限定 KitKat
     brand: Nestle
     category: food_souvenir_chocolate
+    limited_edition: true
     aliases:
       - kitkat japan
       - regional kitkat
@@ -94,6 +95,7 @@ products:
     canonical_name_cn: Canmake 彩妆
     brand: Canmake
     category: cosmetics_makeup
+    discovery_only: true
     aliases:
       - canmake
       - キャンメイク
@@ -171,6 +173,7 @@ products:
     canonical_name_cn: IP 小物
     brand: Sanrio / Pokemon / Ghibli
     category: non_food_gift
+    discovery_only: true
     aliases:
       - sanrio goods
       - pokemon center goods
@@ -185,6 +188,7 @@ products:
     canonical_name_cn: 日本文具
     brand: Various
     category: non_food_gift
+    discovery_only: true
     aliases:
       - japanese stationery
       - キャラクター文房具
@@ -205,3 +209,249 @@ products:
       - たけのこの里
       - meiji mushroom chocolate
     risk_notes: chocolate melt risk in summer; long-ish shelf life; verify expiry
+
+  # ------------------------------------------------------------------
+  # LLM-curated candidate pool (2026-07): known strong sellers among US /
+  # Chinese-diaspora buyers, pre-filtered against the RED rules (no SPF, no
+  # OTC, no refrigerated, no aerosol). Scores decide; seeds are candidates.
+  # ---- food: cookies / sandwiches ----
+  - canonical_name_en: Yoku Moku Cigare
+    canonical_name_jp: ヨックモック シガール
+    canonical_name_cn: Yoku Moku 蛋卷
+    brand: Yoku Moku
+    category: food_souvenir_cookie
+    aliases: [yoku moku, シガール, cigare butter cookie, 白色蛋卷]
+    risk_notes: classic gift tin; butter cookie; sturdy tin lowers crush risk; check expiry
+
+  - canonical_name_en: Sugar Butter Sand no Ki
+    canonical_name_jp: シュガーバターの木
+    canonical_name_cn: 砂糖黄油树
+    brand: Grapestone
+    category: food_souvenir_cookie
+    aliases: [sugar butter tree, シュガーバターサンドの木, 砂糖树]
+    risk_notes: popular Tokyo station gift; contains dairy filling; verify expiry (about 2-3 months)
+
+  - canonical_name_en: Press Butter Sand
+    canonical_name_jp: プレスバターサンド
+    canonical_name_cn: Press Butter Sand 黄油夹心饼
+    brand: BAKE
+    category: food_souvenir_cookie
+    aliases: [press butter sand, バターサンド]
+    risk_notes: very hot seller but SHORT shelf life (about 1 month) and butter caramel
+      filling; expect watchlist unless expiry confirms enough runway
+
+  # ---- food: candy / gummy (long shelf life, light, low melt) ----
+  - canonical_name_en: Bourbon Fettuccine Gummi
+    canonical_name_jp: フェットチーネグミ
+    canonical_name_cn: 意面软糖
+    brand: Bourbon
+    category: food_souvenir_candy
+    aliases: [fettuccine gummy, フェットチーネ, 布尔本软糖]
+    risk_notes: light, long shelf life, cheap; margin depends on bundling multiple packs
+
+  - canonical_name_en: Kanro Pure Gummy
+    canonical_name_jp: カンロ ピュレグミ
+    canonical_name_cn: 甘乐鲜果软糖
+    brand: Kanro
+    category: food_souvenir_candy
+    aliases: [pure gummy, ピュレグミ, kanro gummy]
+    risk_notes: seasonal limited flavors add scarcity value; bundle to reach margin
+
+  - canonical_name_en: UHA Kororo Gummy
+    canonical_name_jp: UHA コロロ
+    canonical_name_cn: 悠哈酷露露果汁软糖
+    brand: UHA
+    category: food_souvenir_candy
+    aliases: [kororo, コロロ, uha gummy, 酷露露]
+    risk_notes: strong Chinese-market recognition; grape flavor iconic; light and packable
+
+  - canonical_name_en: Hi-Chew Japan Limited Flavors
+    canonical_name_jp: ハイチュウ 限定
+    canonical_name_cn: 嗨啾日本限定
+    brand: Morinaga
+    category: food_souvenir_candy
+    limited_edition: true
+    aliases: [hi-chew, ハイチュウ, hichew japan exclusive]
+    risk_notes: US sells standard flavors widely -- only Japan-exclusive flavors clear
+      the differentiation bar; verify flavor is not US-available
+
+  # ---- food: snacks ----
+  - canonical_name_en: Kameda Kaki no Tane
+    canonical_name_jp: 亀田の柿の種
+    canonical_name_cn: 龟田柿种米果
+    brand: Kameda
+    category: food_souvenir_snack
+    aliases: [kaki no tane, 柿の種, kakinotane, 柿种]
+    risk_notes: contains peanuts (allergen labeling); light; regional flavors differentiate
+
+  - canonical_name_en: Pocky Japan Limited
+    canonical_name_jp: ポッキー 限定
+    canonical_name_cn: 百奇日本限定
+    brand: Glico
+    category: food_souvenir_chocolate
+    limited_edition: true
+    aliases: [pocky limited, ポッキー, 百奇限定, glico pocky]
+    risk_notes: only regional/seasonal editions differentiate from US retail; chocolate
+      coating melts in summer
+
+  - canonical_name_en: Country Ma'am Cookies
+    canonical_name_jp: カントリーマアム
+    canonical_name_cn: 不二家乡村妈妈曲奇
+    brand: Fujiya
+    category: food_souvenir_cookie
+    aliases: [country maam, カントリーマアム, 乡村妈妈]
+    risk_notes: contains chocolate chips (melt in summer); regional limited flavors are
+      the differentiators
+
+  - canonical_name_en: Tirol Choco Assortment
+    canonical_name_jp: チロルチョコ
+    canonical_name_cn: 松尾多彩巧克力
+    brand: Tirol
+    category: food_souvenir_chocolate
+    aliases: [tirol choco, チロル, 松尾巧克力]
+    risk_notes: high melt risk in July-August; cute packaging drives gifting demand
+
+  # ---- food: tea ----
+  - canonical_name_en: Uji Matcha Powder (Ippodo / Marukyu Koyamaen)
+    canonical_name_jp: 宇治抹茶 一保堂 丸久小山園
+    canonical_name_cn: 宇治抹茶粉
+    brand: Ippodo / Marukyu Koyamaen
+    category: food_souvenir_snack
+    aliases: [ippodo matcha, marukyu koyamaen, 抹茶粉, uji matcha, ceremonial matcha]
+    risk_notes: very high value density and strong US demand; tin cans are sturdy;
+      verify labeling/ingredient disclosure for resale; keep sealed original tins
+
+  # ---- cosmetics: color makeup (no sun-protection, no drug claims) ----
+  - canonical_name_en: KATE Lip Monster
+    canonical_name_jp: ケイト リップモンスター
+    canonical_name_cn: KATE 口红怪兽
+    brand: KATE (Kanebo)
+    category: cosmetics_makeup
+    aliases: [lip monster, リップモンスター, kate lipstick, 口红怪兽]
+    risk_notes: repeatedly sold out in Japan; strong CN social heat; popular shades
+      (03, 05) matter -- record shade in field survey
+
+  - canonical_name_en: Opera Lip Tint
+    canonical_name_jp: オペラ リップティント
+    canonical_name_cn: Opera 花嫁口红
+    brand: Opera (Imju)
+    category: cosmetics_makeup
+    aliases: [opera lip tint, オペラ, 花嫁口红]
+    risk_notes: long-running viral lip; light and tiny; shade 05 iconic
+
+  - canonical_name_en: Cezanne Pearl Glow Highlighter
+    canonical_name_jp: セザンヌ パールグロウハイライト
+    canonical_name_cn: Cezanne 珠光高光
+    brand: Cezanne
+    category: cosmetics_makeup
+    aliases: [cezanne highlighter, パールグロウ, 塞尚高光]
+    risk_notes: famous budget dupe reputation; pressed powder can crack -- pad well
+
+  - canonical_name_en: Excel Skinny Rich Shadow
+    canonical_name_jp: エクセル スキニーリッチシャドウ
+    canonical_name_cn: Excel 四色眼影
+    brand: Excel (Noevir)
+    category: cosmetics_makeup
+    aliases: [excel eyeshadow, スキニーリッチ, excel四色眼影]
+    risk_notes: workhorse neutral palettes; pressed powder crush risk in transit
+
+  - canonical_name_en: Heroine Make Long and Curl Mascara
+    canonical_name_jp: ヒロインメイク ロングUPマスカラ
+    canonical_name_cn: Kiss Me 花漾美姬睫毛膏
+    brand: Isehan
+    category: cosmetics_makeup
+    aliases: [heroine make mascara, ヒロインメイク, 花漾美姬]
+    risk_notes: waterproof formula is the selling point; sealed new only
+
+  - canonical_name_en: D-UP Silky Liquid Eyeliner
+    canonical_name_jp: ディーアップ シルキーリキッドアイライナー
+    canonical_name_cn: D-UP 眼线液笔
+    brand: D-UP
+    category: cosmetics_makeup
+    aliases: [d-up eyeliner, ディーアップ, dup眼线]
+    risk_notes: liquid pen -- minor leak risk; light and high per-unit value
+
+  # ---- cosmetics: hair / lip care ----
+  - canonical_name_en: Fino Premium Touch Hair Mask
+    canonical_name_jp: フィーノ プレミアムタッチ ヘアマスク
+    canonical_name_cn: Fino 高效渗透发膜
+    brand: Shiseido Fino
+    category: skincare
+    aliases: [fino hair mask, フィーノ, fino发膜]
+    risk_notes: jar about 230g -- heavier than makeup, watch weight budget; huge CN
+      recognition; verify no medicated claims on current packaging
+
+  - canonical_name_en: DHC Lip Cream
+    canonical_name_jp: DHC 薬用リップクリーム
+    canonical_name_cn: DHC 橄榄润唇膏
+    brand: DHC
+    category: skincare
+    aliases: [dhc lip cream, DHCリップ, dhc润唇膏]
+    risk_notes: top-selling lip balm BUT labeled 薬用 (quasi-drug) in Japan -- expect
+      YELLOW and confirm US-sale wording avoids medicated claims
+
+  # ---- non-food gifts ----
+  - canonical_name_en: KAI Seki Magoroku Nail Clipper
+    canonical_name_jp: 貝印 関孫六 爪切り
+    canonical_name_cn: 贝印关孙六指甲刀
+    brand: KAI
+    category: non_food_gift
+    aliases: [kai nail clipper, 関孫六, 贝印指甲刀, seki magoroku]
+    risk_notes: tiny, no shelf life, famous quality; checked luggage only (blade rule
+      caution for carry-on); high profit density candidate
+
+  - canonical_name_en: Hobonichi Techo Planner
+    canonical_name_jp: ほぼ日手帳
+    canonical_name_cn: Hobonichi 手帐
+    brand: Hobonichi
+    category: non_food_gift
+    aliases: [hobonichi techo, ほぼ日, hobo手帐]
+    risk_notes: cult US following; new editions release around September -- seasonality
+      matters; covers/limited collabs carry the premium
+
+  - canonical_name_en: mt Washi Tape Set
+    canonical_name_jp: mt マスキングテープ
+    canonical_name_cn: mt 和纸胶带
+    brand: mt (Kamoi)
+    category: non_food_gift
+    aliases: [washi tape, マスキングテープ, mt胶带, masking tape japan]
+    risk_notes: light, flat, no expiry; Japan-exclusive patterns differentiate; margin
+      needs multi-roll bundles
+
+  - canonical_name_en: Uni Kuru Toga Limited Edition
+    canonical_name_jp: クルトガ 限定
+    canonical_name_cn: 三菱旋转铅笔限定款
+    brand: Uni Mitsubishi
+    category: non_food_gift
+    limited_edition: true
+    aliases: [kuru toga, クルトガ, kurutoga limited, 旋转自动铅笔]
+    risk_notes: standard models are US-available -- only limited/collab editions clear
+      the differentiation bar
+
+  - canonical_name_en: Zebra Mildliner Japan Set
+    canonical_name_jp: ゼブラ マイルドライナー
+    canonical_name_cn: 斑马淡色荧光笔
+    brand: Zebra
+    category: non_food_gift
+    aliases: [mildliner, マイルドライナー, 斑马荧光笔]
+    risk_notes: widely available on US Amazon -- likely low margin; kept as a control
+      candidate to validate the scoring, expect low tier
+
+  - canonical_name_en: Pokemon Center Exclusive Plush
+    canonical_name_jp: ポケモンセンター限定 ぬいぐるみ
+    canonical_name_cn: 宝可梦中心限定玩偶
+    brand: Pokemon Center
+    category: non_food_gift
+    limited_edition: true
+    aliases: [pokemon center plush, ポケセン ぬいぐるみ, 宝可梦限定]
+    risk_notes: store-exclusive = real scarcity in US; bulky for suitcase -- volume
+      cost is the constraint; keep tags and receipts for authenticity
+
+  - canonical_name_en: Gachapon Capsule Toys Assortment
+    canonical_name_jp: ガチャガチャ カプセルトイ
+    canonical_name_cn: 日本扭蛋
+    brand: Bandai / Takara Tomy
+    category: non_food_gift
+    aliases: [gachapon, gashapon, ガチャガチャ, 扭蛋]
+    risk_notes: small and light; sold as blind/opened sets; IP wording caution in
+      listings; novelty demand is trend-sensitive

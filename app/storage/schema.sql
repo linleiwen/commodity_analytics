@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS product_master (
     crush_risk_level       TEXT,
     leak_risk_level        TEXT,
     limited_edition_flag   INTEGER DEFAULT 0,
+    discovery_only_flag    INTEGER DEFAULT 0,  -- brand/category-level seed: rank context only, never a buy row
     category_group         TEXT,
     default_shelf_life_days INTEGER,
     risk_notes             TEXT,

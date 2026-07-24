@@ -27,5 +27,8 @@ business_constraints:
     cosmetic: 0.35
     non_food_gifts: 0.40
   diversity_bonus: true
+  # Limited/exclusive items cannot be counted on at the store: rank them, but keep
+  # them OUT of the committed packing plan (opportunistic buys only).
+  exclude_limited_edition_from_plan: true
   # Small multiplicative nudge to spread picks across categories when diversity_bonus is on.
   diversity_bonus_factor: 1.05

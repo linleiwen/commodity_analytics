@@ -67,8 +67,11 @@ def build_ranked(run_id: str) -> pd.DataFrame:
         {True: "YES", False: "no"}
     )
 
-    df["_blocked"] = (df["priority_tier"] == "Blocked").astype(int)
-    df = df.sort_values(by=["_blocked", "final_score"], ascending=[True, False]).reset_index(drop=True)
+    # Actionable tiers first, then score: a high-scoring Watchlist row must not sit
+    # between buy recommendations and read like one.
+    _tier_order = {"A": 0, "B": 1, "C": 2, "Watchlist": 3, "Blocked": 4}
+    df["_tier_rank"] = df["priority_tier"].map(_tier_order).fillna(3).astype(int)
+    df = df.sort_values(by=["_tier_rank", "final_score"], ascending=[True, False]).reset_index(drop=True)
     df.insert(0, "Rank", range(1, len(df) + 1))
 
     def _num(col: str):

@@ -74,10 +74,20 @@ def _aggregate_product(
 
     # ---- JP acquisition cost (USD): prefer manual field-survey prices ----
     jp = p_obs[(p_obs["country"] == "JP") & p_obs["price_usd"].notna()] if not p_obs.empty else p_obs
+    if not jp.empty and "listing_title" in jp.columns:
+        # Donation-scheme listings (ふるさと納税) price the tax donation, not the item.
+        jp = jp[~jp["listing_title"].astype(str).str.contains("ふるさと納税", na=False)]
     jp_cost = None
     if not jp.empty:
         field = jp[jp["source_type"] == "manual"]
-        jp_cost = _median((field if not field.empty else jp)["price_usd"])
+        if not field.empty:
+            jp_cost = _median(field["price_usd"])
+        else:
+            # Online JP listings mix single boxes with multi-box gift sets, which drags
+            # the median far above what one unit costs in a store. The 25th percentile
+            # tracks the single-pack price band until real field prices arrive.
+            s = pd.to_numeric(jp["price_usd"], errors="coerce").dropna()
+            jp_cost = float(s.quantile(0.25)) if not s.empty else None
 
     # ---- US expected sold price (USD): prefer sell-through medians, else haircut listings ----
     us_price = None
@@ -378,6 +388,9 @@ def compute_scores(
         if match_block:
             blocked = True
             reasons.append("match_confidence_below_threshold_block")
+        if product.get("discovery_only_flag"):
+            watchlist = True
+            reasons.append("generic_seed_discovery_only")
         if r["shelf_life_hardfail"]:
             if product.get("is_food"):
                 watchlist = True

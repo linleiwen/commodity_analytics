@@ -1,0 +1,184 @@
+# LLM-estimated retail package dimensions & weights (2026-07, pre-trip planning).
+#
+# PROVENANCE: estimated from product knowledge of typical retail versions -- NOT
+# measured. Applied by `import-seeds` as GAP-FILL ONLY: a field that already has a
+# value in product_master (e.g. from the Japan field survey) is never overwritten.
+# Re-verify dimensions/weight in-store for every A/B-tier SKU before buying.
+#
+# Keyed by canonical_name_en. dims_cm = [length, width, height]; weight in grams.
+# `assumed_version` documents which retail pack the numbers describe -- pack sizes
+# differ, so match against listings before trusting the profit math.
+
+estimates:
+  Shiroi Koibito:
+    assumed_version: 12-piece box
+    dims_cm: [19, 14, 4]
+    weight_g: 260
+  Tokyo Banana:
+    assumed_version: 8-piece box
+    dims_cm: [25, 11, 5]
+    weight_g: 350
+  Jaga Pokkuru:
+    assumed_version: 10-bag box
+    dims_cm: [25, 13, 10]
+    weight_g: 300
+  Japanese Regional KitKat Assortment:
+    assumed_version: 12-mini bag
+    dims_cm: [20, 15, 3]
+    weight_g: 150
+  Royce Nama Chocolate:
+    assumed_version: 20-piece box (blocked anyway)
+    dims_cm: [15, 12, 3]
+    weight_g: 300
+  Tokyo Milk Cheese Factory Cookies:
+    assumed_version: 10-piece box
+    dims_cm: [22, 12, 4]
+    weight_g: 250
+  LuLuLun Face Mask:
+    assumed_version: 7-day pack
+    dims_cm: [13, 10, 5]
+    weight_g: 250
+  Canmake Makeup:
+    assumed_version: brand-average small item
+    dims_cm: [7, 7, 3]
+    weight_g: 60
+  Canmake Marshmallow Finish Powder:
+    assumed_version: compact 10g
+    dims_cm: [8, 8, 3]
+    weight_g: 90
+  Canmake Cream Cheek:
+    assumed_version: single pot
+    dims_cm: [6, 6, 3]
+    weight_g: 40
+  Hada Labo Gokujyun Lotion:
+    assumed_version: 170ml bottle
+    dims_cm: [5, 5, 15]
+    weight_g: 220
+  Anessa Sunscreen:
+    assumed_version: 60ml (blocked anyway)
+    dims_cm: [6, 3, 15]
+    weight_g: 110
+  Japanese Eye Drops:
+    assumed_version: single box (blocked anyway)
+    dims_cm: [5, 3, 8]
+    weight_g: 30
+  Sanrio / Pokemon / Ghibli Small Goods:
+    assumed_version: keychain / small figure
+    dims_cm: [10, 8, 5]
+    weight_g: 80
+  Japanese Character Stationery:
+    assumed_version: pen / sticker set
+    dims_cm: [20, 10, 2]
+    weight_g: 100
+  Meiji Kinoko no Yama / Takenoko no Sato:
+    assumed_version: single box
+    dims_cm: [15, 10, 4]
+    weight_g: 90
+  Yoku Moku Cigare:
+    assumed_version: 14-piece tin
+    dims_cm: [20, 14, 5]
+    weight_g: 350
+  Sugar Butter Sand no Ki:
+    assumed_version: 14-piece box
+    dims_cm: [24, 12, 5]
+    weight_g: 300
+  Press Butter Sand:
+    assumed_version: 9-piece box
+    dims_cm: [18, 12, 5]
+    weight_g: 300
+  Bourbon Fettuccine Gummi:
+    assumed_version: single bag
+    dims_cm: [17, 9, 2]
+    weight_g: 55
+  Kanro Pure Gummy:
+    assumed_version: single bag
+    dims_cm: [15, 10, 2]
+    weight_g: 60
+  UHA Kororo Gummy:
+    assumed_version: single bag
+    dims_cm: [12, 8, 2]
+    weight_g: 50
+  Hi-Chew Japan Limited Flavors:
+    assumed_version: 5-pack sleeve
+    dims_cm: [15, 10, 4]
+    weight_g: 250
+  Kameda Kaki no Tane:
+    assumed_version: 6-pack bag
+    dims_cm: [20, 15, 8]
+    weight_g: 200
+  Pocky Japan Limited:
+    assumed_version: single box
+    dims_cm: [15, 8, 3]
+    weight_g: 70
+  Country Ma'am Cookies:
+    assumed_version: 16-piece bag
+    dims_cm: [22, 15, 6]
+    weight_g: 200
+  Tirol Choco Assortment:
+    assumed_version: 27-piece bag
+    dims_cm: [20, 15, 5]
+    weight_g: 250
+  Uji Matcha Powder (Ippodo / Marukyu Koyamaen):
+    assumed_version: 40g tin
+    dims_cm: [6, 6, 8]
+    weight_g: 120
+  KATE Lip Monster:
+    assumed_version: single lipstick
+    dims_cm: [3, 3, 10]
+    weight_g: 30
+  Opera Lip Tint:
+    assumed_version: single lipstick
+    dims_cm: [3, 3, 11]
+    weight_g: 30
+  Cezanne Pearl Glow Highlighter:
+    assumed_version: single compact
+    dims_cm: [7, 7, 2]
+    weight_g: 50
+  Excel Skinny Rich Shadow:
+    assumed_version: quad palette
+    dims_cm: [8, 6, 2]
+    weight_g: 80
+  Heroine Make Long and Curl Mascara:
+    assumed_version: single tube
+    dims_cm: [3, 3, 12]
+    weight_g: 25
+  D-UP Silky Liquid Eyeliner:
+    assumed_version: single pen
+    dims_cm: [2, 2, 13]
+    weight_g: 15
+  Fino Premium Touch Hair Mask:
+    assumed_version: 230g jar
+    dims_cm: [9, 9, 7]
+    weight_g: 280
+  DHC Lip Cream:
+    assumed_version: single stick
+    dims_cm: [2, 2, 8]
+    weight_g: 10
+  KAI Seki Magoroku Nail Clipper:
+    assumed_version: boxed clipper
+    dims_cm: [8, 4, 2]
+    weight_g: 50
+  Hobonichi Techo Planner:
+    assumed_version: A6 book + box
+    dims_cm: [16, 12, 3]
+    weight_g: 250
+  mt Washi Tape Set:
+    assumed_version: 5-roll set
+    dims_cm: [10, 10, 3]
+    weight_g: 120
+  Uni Kuru Toga Limited Edition:
+    assumed_version: single pen blister
+    dims_cm: [18, 6, 2]
+    weight_g: 30
+  Zebra Mildliner Japan Set:
+    assumed_version: 5-pen set
+    dims_cm: [15, 10, 2]
+    weight_g: 60
+  Pokemon Center Exclusive Plush:
+    assumed_version: medium plush
+    dims_cm: [25, 18, 15]
+    weight_g: 250
+  Gachapon Capsule Toys Assortment:
+    assumed_version: 5-capsule set
+    dims_cm: [15, 10, 6]
+    weight_g: 150

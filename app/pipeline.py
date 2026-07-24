@@ -38,9 +38,32 @@ COLLECTORS = {
 
 
 # --------------------------------------------------------------------------- seeds
+def _load_package_estimates() -> dict[str, dict[str, Any]]:
+    """Optional pre-trip package estimates (config/package_estimates.yaml).
+
+    Gap-fill only: values are applied by :func:`import_seeds` solely where the
+    product row still has NULL, so field-survey measurements always win.
+    """
+    path = settings.CONFIG_DIR / "package_estimates.yaml"
+    if not path.exists():
+        return {}
+    data = settings.load_yaml_file(path)
+    out: dict[str, dict[str, Any]] = {}
+    for name, est in (data.get("estimates") or {}).items():
+        dims = est.get("dims_cm") or [None, None, None]
+        out[str(name)] = {
+            "package_length_cm": dims[0] if len(dims) > 0 else None,
+            "package_width_cm": dims[1] if len(dims) > 1 else None,
+            "package_height_cm": dims[2] if len(dims) > 2 else None,
+            "package_weight_g": est.get("weight_g"),
+        }
+    return out
+
+
 def import_seeds(file_path: str | Path) -> tuple[int, list[str]]:
     data = settings.load_yaml_file(file_path)
     categories_cfg = settings.load_config("categories")
+    estimates = _load_package_estimates()
     seeds = data.get("products", data if isinstance(data, list) else [])
     messages: list[str] = []
     now = db.utcnow()
@@ -63,6 +86,10 @@ def import_seeds(file_path: str | Path) -> tuple[int, list[str]]:
                 for k in existing.keys():
                     if row.get(k) is None and existing[k] is not None:
                         row[k] = existing[k]
+            # Pre-trip package estimates fill remaining gaps only (never overwrite).
+            for k, v in estimates.get(product.canonical_name_en, {}).items():
+                if row.get(k) is None and v is not None:
+                    row[k] = v
             row["created_at"] = existing["created_at"] if existing else now
             row["updated_at"] = now
             db.upsert(conn, "product_master", row)
