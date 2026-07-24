@@ -98,8 +98,36 @@ products:
       - canmake
       - キャンメイク
       - canmake 彩妆
-      - canmake cream cheek
-    risk_notes: generally easier than skincare; check shade demand
+    risk_notes: brand-level discovery seed; buy decisions use the SKU-level seeds below
+
+  - canonical_name_en: Canmake Marshmallow Finish Powder
+    canonical_name_jp: キャンメイク マシュマロフィニッシュパウダー
+    canonical_name_cn: Canmake 棉花糖蜜粉饼
+    brand: Canmake
+    category: cosmetics_makeup
+    aliases:
+      - marshmallow finish powder
+      - マシュマロフィニッシュパウダー
+      - 棉花糖粉饼
+      - canmake marshmallow powder
+    risk_notes: top US-demanded Canmake SKU (11/25 eBay listings) BUT standard version
+      is labeled SPF26 PA++ -> US treats SPF claims as OTC sunscreen drug; verify per
+      shade/version; refill vs compact pack sizes differ
+
+  - canonical_name_en: Canmake Cream Cheek
+    canonical_name_jp: キャンメイク クリームチーク
+    canonical_name_cn: Canmake 腮红膏
+    brand: Canmake
+    category: cosmetics_makeup
+    aliases:
+      - cream cheek
+      - クリームチーク
+      - canmake 腮红
+      - canmake cream blush
+    # NOTE: compliance keywords match as substrings -- never write "non-SPF"/"no SPF"
+    # in notes (it would trigger the sunscreen RED rule); describe positively instead.
+    risk_notes: classic cream blush without sun-protection claims; small/light; check
+      shade demand (popular shades sell out)
 
   - canonical_name_en: Hada Labo Gokujyun Lotion
     canonical_name_jp: 肌ラボ 極潤

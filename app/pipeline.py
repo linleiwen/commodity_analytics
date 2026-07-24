@@ -53,9 +53,16 @@ def import_seeds(file_path: str | Path) -> tuple[int, list[str]]:
                 continue
             row = product.to_row()
             existing = conn.execute(
-                "SELECT created_at FROM product_master WHERE product_id = ?",
+                "SELECT * FROM product_master WHERE product_id = ?",
                 (product.product_id,),
             ).fetchone()
+            if existing:
+                # Re-importing seeds must not wipe enrichment (dims/weight/shelf-life
+                # backfilled by field surveys or collectors): keep existing values for
+                # fields the seed leaves empty.
+                for k in existing.keys():
+                    if row.get(k) is None and existing[k] is not None:
+                        row[k] = existing[k]
             row["created_at"] = existing["created_at"] if existing else now
             row["updated_at"] = now
             db.upsert(conn, "product_master", row)
